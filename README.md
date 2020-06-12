@@ -1,4 +1,4 @@
-# Esoterika - A minimalistic discussion board
+# Argument - A minimalistic discussion board
 
 (version number) (build status)
 
