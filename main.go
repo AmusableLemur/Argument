@@ -9,12 +9,11 @@ func main() {
     m := martini.Classic()
 
     m.Use(render.Renderer(render.Options{
-        Extensions: []string{".html"},
         Layout: "layout",
     }))
 
     m.Get("/", func(r render.Render) {
-        r.HTML(200, "index")
+        r.HTML(200, "index", "world")
     })
 
     m.Run()
