@@ -11,5 +11,6 @@ This is a small project to build a discussion platform with an old-school bullet
 ## Technologies
  - Go
  - Martini
+ - Bootstrap
 
 ## Status
