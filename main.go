@@ -1,20 +1,19 @@
 package main
 
 import (
-    "github.com/go-martini/martini"
-    "github.com/martini-contrib/render"
+    "net/http"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {
-    m := martini.Classic()
+	r := gin.Default()
+    r.LoadHTMLGlob("templates/*")
 
-    m.Use(render.Renderer(render.Options{
-        Layout: "layout",
-    }))
+    r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": "Main website",
+		})
+	})
 
-    m.Get("/", func(r render.Render) {
-        r.HTML(200, "index", "world")
-    })
-
-    m.Run()
+    r.Run(":8080")
 }
