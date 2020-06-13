@@ -1,6 +1,7 @@
 # Argument - A minimalistic discussion board
 
-(version number) (build status)
+(version number)
+(build status)
 
 This is a small project to build a discussion platform with an old-school bulletin board system (BBS) feel to it.
 
@@ -14,7 +15,8 @@ This is a small project to build a discussion platform with an old-school bullet
 ## Technologies
 
  - Go
- - Gin
- - Bootstrap
+ - Gin Web Framework
+ - [NES.css](https://nostalgic-css.github.io/NES.css/)
+ - [NES.icons](https://github.com/nostalgic-css/NES.icons)
 
 ## Status

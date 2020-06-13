@@ -8,8 +8,68 @@
 
     <title>Argument - A minimalistic discussion board</title>
 
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-GKugkVcT8wqoh3M8z1lqHbU+g6j498/ZT/zuXbepz7Dc09/otQZxTimkEMTkRWHP" crossorigin="anonymous">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/nes.icons@2.0.1/css/nes-icons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        header, main, footer {
+            margin: 0 auto;
+            max-width: 986px;
+            padding: 10px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: stretch;
+            margin: 10px auto;
+        }
+
+        header h1 {
+            display: flex;
+            align-items: center;
+            line-height: 2em;
+            margin: 0;
+        }
+
+        header i {
+            font-size: 0.8em;
+            position: relative;
+            padding-right: 2em;
+            top: -0.4em;
+        }
+
+        aside {
+            display: flex;
+            float: right;
+            align-items: center;
+        }
+
+        aside .nes-btn {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <h1>
+            <i class="nes-icon exclamation-triangle"></i>
+            Argument
+        </h1>
+
+        <aside>
+            <a href="#" class="nes-btn">Log in</a>
+            <a href="#" class="nes-btn is-primary">Register</a>
+        </aside>
+    </header>
+
+    <main>
 {{end}}
