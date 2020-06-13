@@ -2,6 +2,7 @@
 
 (version number)
 (build status)
+[![Go Report Card](https://goreportcard.com/badge/github.com/amusablelemur/argument)](https://goreportcard.com/report/github.com/amusablelemur/argument)
 
 This is a small project to build a discussion platform with an old-school bulletin board system (BBS) feel to it.
 
