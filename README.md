@@ -8,9 +8,13 @@ This is a small project to build a discussion platform with an old-school bullet
 
 ## Setup & Installation
 
+  $ go get github.com/gin-gonic/gin
+  $ go run main.go
+
 ## Technologies
+
  - Go
- - Martini
+ - Gin
  - Bootstrap
 
 ## Status
