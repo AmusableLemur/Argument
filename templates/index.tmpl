@@ -1,14 +1,34 @@
 {{template "header"}}
-<section class="topic">
-    <h2 id="apost">
-        <a href="#apost"># a post</a>
-    </h2>
-    <p>
-        NES.css only provides components. You will need to define your own layout.
+<a class="nes-balloon from-left topic" href="#apost" id="apost">
+    <h2>a post</h2>
+    <p class="details">
+        posted <em>less than an hour ago</em> by <em>rasmus</em><br>
+        4 comments
     </p>
-    <ul>
-        <li><em>just now</em> by <em>rasmus</em></li>
-        <li>0 responses</li>
-    </ul>
+</a>
+
+<a class="nes-balloon from-left topic" href="#apost" id="apost">
+    <h2>another post</h2>
+    <p class="details">
+        posted <em>less than an hour ago</em> by <em>rasmus</em><br>
+        4 comments
+    </p>
+</a>
+
+<section class="nes-container with-title submission">
+    <h3 class="title">New Post</h3>
+
+    <div class="nes-field">
+        <label for="name_field">Post Title</label>
+        <input type="text" id="name_field" class="nes-input">
+    </div>
+
+    <div id="textarea" class="nes-field">
+        <label for="textarea_field">Content</label>
+        <textarea id="textarea_field" class="nes-textarea"></textarea>
+    </div>
+
+    <button type="button" class="nes-btn is-disabled right-align">Submit Post</button>
+    <span>You need to be signed in to post</span>
 </section>
 {{template "footer"}}
