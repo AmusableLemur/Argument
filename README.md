@@ -6,7 +6,7 @@
 
 This is a small project to build a (very) simple discussion platform with a retro feel to it. The project is inspired by old school bulletin board systems and 90's forum software.
 
-![Screenshot](/assets/screenshot.png)
+![Screenshot](/assets/screenshot.png?raw=true)
 
 ## Setup & Installation
 
