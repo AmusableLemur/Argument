@@ -1,6 +1,6 @@
 # Argument - A minimalistic discussion board
 
-(version number)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/amusablelemur/argument)
 (build status)
 [![Go Report Card](https://goreportcard.com/badge/github.com/amusablelemur/argument)](https://goreportcard.com/report/github.com/amusablelemur/argument)
 
