@@ -5,15 +5,20 @@ import (
     "github.com/gin-gonic/gin"
 )
 
-func main() {
-	r := gin.Default()
+func setupRouter() *gin.Engine {
+    r := gin.Default()
     r.LoadHTMLGlob("templates/*")
 
     r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": "Main website",
-		})
-	})
+        c.HTML(http.StatusOK, "index.tmpl", gin.H{
+            "title": "Main website",
+        })
+    })
 
+    return r
+}
+
+func main() {
+	r := setupRouter()
     r.Run(":8080")
 }
