@@ -10,7 +10,7 @@ This is a small project to build a (very) simple discussion platform with a retr
 
 ## Setup & Installation
 
-    $ go get github.com/gin-gonic/gin
+    $ go get -v -t -d ./...
     $ go run main.go
 
 ## Technologies
