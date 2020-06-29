@@ -19,6 +19,8 @@ func setupRouter() *gin.Engine {
 		})
 	})
 
+	print(config.Title)
+
 	return r
 }
 
