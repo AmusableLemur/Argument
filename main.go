@@ -22,14 +22,17 @@ func setupRouter() *gin.Engine {
 	return r
 }
 
-func main() {
-	stream, err := ioutil.ReadFile("config.toml")
+func setupConfig(f string) Config {
+	stream, err := ioutil.ReadFile(f)
 
 	if err != nil {
 		panic(err)
 	}
 
-	config = LoadConfig(stream)
+	return LoadConfig(stream)
+}
 
+func main() {
+	config = setupConfig("config.toml")
 	setupRouter().Run(":8080")
 }
