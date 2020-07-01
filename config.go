@@ -1,6 +1,8 @@
 package main
 
 import (
+	"io/ioutil"
+
 	toml "github.com/pelletier/go-toml"
 )
 
@@ -13,8 +15,19 @@ type Config struct {
 	}
 }
 
-// LoadConfig converts a byte stream to a Config object
-func LoadConfig(stream []byte) Config {
+// LoadConfig loads a config from a file
+func LoadConfig(f string) Config {
+	stream, err := ioutil.ReadFile(f)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return SetupConfig(stream)
+}
+
+// SetupConfig converts a byte stream to a Config object
+func SetupConfig(stream []byte) Config {
 	config := Config{}
 	toml.Unmarshal(stream, &config)
 

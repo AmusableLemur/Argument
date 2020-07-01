@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,17 +21,7 @@ func setupRouter() *gin.Engine {
 	return r
 }
 
-func setupConfig(f string) Config {
-	stream, err := ioutil.ReadFile(f)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return LoadConfig(stream)
-}
-
 func main() {
-	config = setupConfig("config.toml")
+	config = LoadConfig("config.toml")
 	setupRouter().Run(":8080")
 }

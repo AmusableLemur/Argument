@@ -7,7 +7,7 @@ import (
 )
 
 func TestConfig(t *testing.T) {
-	config := LoadConfig([]byte(`
+	config := SetupConfig([]byte(`
         [Database]
         Username = "root"
         Password = "secret"`),
@@ -16,4 +16,20 @@ func TestConfig(t *testing.T) {
 	assert.Equal(t, config.Database.Username, "root")
 	assert.Equal(t, config.Database.Password, "secret")
 	assert.Equal(t, config.Title, "Argument")
+}
+
+func TestLoadingConfig(t *testing.T) {
+	config := LoadConfig("config-sample.toml")
+
+	assert.Equal(t, "Argument", config.Title)
+}
+
+func TestLoadingNonexistentConfig(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("Missing config file should throw an error")
+		}
+	}()
+
+	LoadConfig("non-existent-config.toml")
 }
