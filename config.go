@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 
 	toml "github.com/pelletier/go-toml"
@@ -12,6 +13,10 @@ type Config struct {
 	Database struct {
 		Username string
 		Password string
+		Name     string
+		Host     string
+		Port     int
+		URI      string
 	}
 }
 
@@ -34,6 +39,8 @@ func SetupConfig(stream []byte) Config {
 	if "" == config.Title {
 		config.Title = "Argument"
 	}
+
+	config.Database.URI = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", config.Database.Username, config.Database.Password, config.Database.Host, config.Database.Port, config.Database.Name)
 
 	return config
 }

@@ -33,3 +33,9 @@ func TestLoadingNonexistentConfig(t *testing.T) {
 
 	LoadConfig("non-existent-config.toml")
 }
+
+func TestDatabaseURIConfig(t *testing.T) {
+	config := LoadConfig("config-sample.toml")
+
+	assert.Equal(t, "root:secret@tcp(localhost:3306)/argument", config.Database.URI)
+}
