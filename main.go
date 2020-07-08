@@ -15,6 +15,7 @@ func setupRouter() *gin.Engine {
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"title": config.Title,
+			"posts": GetPosts(),
 		})
 	})
 
@@ -23,5 +24,7 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	config = LoadConfig("config.toml")
+
+	Connect(config.Database.URI)
 	setupRouter().Run(":8080")
 }
