@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var db *sql.DB
@@ -20,7 +22,7 @@ func Connect(URI string) {
 	db, err = sql.Open("mysql", config.Database.URI)
 
 	if err != nil {
-		log.Fatal("Unable to connect to database")
+		panic(err)
 	}
 }
 
