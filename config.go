@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"strconv"
 
 	toml "github.com/pelletier/go-toml"
 )
@@ -38,6 +40,15 @@ func SetupConfig(stream []byte) Config {
 
 	if "" == config.Title {
 		config.Title = "Argument"
+	}
+
+	if "" != os.Getenv("DB_HOST") {
+		config.Database.Host = os.Getenv("DB_HOST")
+	}
+
+	if "" != os.Getenv("DB_PORT") {
+		i, _ := strconv.Atoi(os.Getenv("DB_PORT"))
+		config.Database.Port = i
 	}
 
 	config.Database.URI = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", config.Database.Username, config.Database.Password, config.Database.Host, config.Database.Port, config.Database.Name)
