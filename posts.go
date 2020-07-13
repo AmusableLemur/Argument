@@ -18,6 +18,10 @@ type Post struct {
 
 // Connect is the function to prepare the database connection
 func Connect(URI string) {
+	if db != nil {
+		return
+	}
+
 	var err error
 	db, err = sql.Open("mysql", config.Database.URI)
 
@@ -28,6 +32,8 @@ func Connect(URI string) {
 
 // GetPosts loads all the available posts from the database
 func GetPosts() []Post {
+	Connect(config.Database.URI)
+
 	results, err := db.Query("SELECT id, title, created_at FROM posts")
 
 	if err != nil {

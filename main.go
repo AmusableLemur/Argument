@@ -24,7 +24,5 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	config = LoadConfig("config.toml")
-
-	Connect(config.Database.URI)
 	setupRouter().Run(":8080")
 }
