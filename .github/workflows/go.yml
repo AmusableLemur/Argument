@@ -44,7 +44,7 @@ jobs:
       run: go build -v .
 
     - name: Prepare database
-      run: mysql -u root -P ${{ job.services.mysql.ports[3306] }} argument < db.sql
+      run: mysql -u root -h 127.0.0.1 -P ${{ job.services.mysql.ports[3306] }} argument < db.sql
 
     - name: Test
       run: go test -race -coverprofile=coverage.txt -covermode=atomic .
