@@ -23,6 +23,6 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
-	config = LoadConfig("config.toml")
+	config, _ = LoadConfig("config.toml")
 	setupRouter().Run(":8080")
 }

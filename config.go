@@ -23,14 +23,15 @@ type Config struct {
 }
 
 // LoadConfig loads a config from a file
-func LoadConfig(f string) Config {
+func LoadConfig(f string) (Config, error) {
 	stream, err := ioutil.ReadFile(f)
 
 	if err != nil {
-		panic(err)
+		// Will return an empty config populated by environment variables
+		return SetupConfig(make([]byte, 0)), err
 	}
 
-	return SetupConfig(stream)
+	return SetupConfig(stream), nil
 }
 
 // SetupConfig converts a byte stream to a Config object

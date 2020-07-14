@@ -9,6 +9,13 @@ import (
 )
 
 func TestIndexRoute(t *testing.T) {
+	var err error
+	config, err = LoadConfig("config.toml")
+
+	if err != nil {
+		config, _ = LoadConfig("config-sample.toml")
+	}
+
 	router := setupRouter()
 
 	w := httptest.NewRecorder()

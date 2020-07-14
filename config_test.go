@@ -19,7 +19,7 @@ func TestConfig(t *testing.T) {
 }
 
 func TestLoadingConfig(t *testing.T) {
-	config := LoadConfig("config-sample.toml")
+	config, _ := LoadConfig("config-sample.toml")
 
 	assert.Equal(t, "Argument", config.Title)
 }
@@ -35,7 +35,7 @@ func TestLoadingNonexistentConfig(t *testing.T) {
 }
 
 func TestDatabaseURIConfig(t *testing.T) {
-	config := LoadConfig("config-sample.toml")
+	config, _ := LoadConfig("config-sample.toml")
 
 	assert.Equal(t, "root:@tcp(127.0.0.1:3306)/argument", config.Database.URI)
 }
