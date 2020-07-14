@@ -25,13 +25,11 @@ func TestLoadingConfig(t *testing.T) {
 }
 
 func TestLoadingNonexistentConfig(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Errorf("Missing config file should throw an error")
-		}
-	}()
+	_, err := LoadConfig("non-existent-config.toml")
 
-	LoadConfig("non-existent-config.toml")
+	if err == nil {
+		t.Errorf("Missing config file should throw an error")
+	}
 }
 
 func TestDatabaseURIConfig(t *testing.T) {
