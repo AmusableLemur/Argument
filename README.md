@@ -1,7 +1,7 @@
 # Argument - A minimalistic discussion board
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/amusablelemur/argument)](https://github.com/AmusableLemur/Argument/releases)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/amusablelemur/argument/Go)](https://github.com/AmusableLemur/Argument/actions?query=workflow%3AGo)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/amusablelemur/argument/Default)](https://github.com/AmusableLemur/Argument/actions?query=workflow%3ADefault)
 [![codecov](https://codecov.io/gh/AmusableLemur/Argument/branch/master/graph/badge.svg)](https://codecov.io/gh/AmusableLemur/Argument)
 [![Go Report Card](https://goreportcard.com/badge/github.com/amusablelemur/argument)](https://goreportcard.com/report/github.com/amusablelemur/argument)
 
