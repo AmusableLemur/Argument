@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -34,23 +33,13 @@ func Connect(URI string) {
 func GetPosts() []Post {
 	Connect(config.Database.URI)
 
-	results, err := db.Query("SELECT id, title, created_at FROM posts")
-
-	if err != nil {
-		log.Fatal("Something is wrong with the database structure")
-	}
+	results, _ := db.Query("SELECT id, title, created_at FROM posts")
 
 	var posts []Post
 
 	for results.Next() {
 		var post Post
-
-		err = results.Scan(&post.ID, &post.Title, &post.DateCreated)
-
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-
+		results.Scan(&post.ID, &post.Title, &post.DateCreated)
 		posts = append(posts, post)
 	}
 
