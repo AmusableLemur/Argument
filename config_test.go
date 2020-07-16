@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -34,6 +36,12 @@ func TestLoadingNonexistentConfig(t *testing.T) {
 
 func TestDatabaseURIConfig(t *testing.T) {
 	config, _ := LoadConfig("config-sample.toml")
+	dbURI := "root:@tcp(127.0.0.1:3306)/argument"
 
-	assert.Equal(t, "root:@tcp(127.0.0.1:3306)/argument", config.Database.URI)
+	if os.Getenv("DB_PORT") != "" {
+		// This is necessary to handle dynamic ports with Github actions
+		strings.Replace(dbURI, "3306", os.Getenv("DB_PORT"), 1)
+	}
+
+	assert.Equal(t, dbURI, config.Database.URI)
 }
