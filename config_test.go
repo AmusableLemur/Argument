@@ -38,9 +38,9 @@ func TestDatabaseURIConfig(t *testing.T) {
 	config, _ := LoadConfig("config-sample.toml")
 	dbURI := "root:@tcp(127.0.0.1:3306)/argument"
 
-	if os.Getenv("DB_PORT") != "" {
+	if "" != os.Getenv("DB_PORT") {
 		// This is necessary to handle dynamic ports with Github actions
-		strings.Replace(dbURI, "3306", os.Getenv("DB_PORT"), 1)
+		dbURI = strings.Replace(dbURI, "3306", os.Getenv("DB_PORT"), 1)
 	}
 
 	assert.Equal(t, dbURI, config.Database.URI)
