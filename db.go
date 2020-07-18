@@ -15,7 +15,7 @@ type Post struct {
 	DateCreated string
 }
 
-// Connect is the function to prepare the database connection
+// Connect prepares the database connection
 func Connect(URI string) {
 	if db != nil {
 		return
@@ -24,9 +24,24 @@ func Connect(URI string) {
 	var err error
 	db, err = sql.Open("mysql", config.Database.URI)
 
+	if err == nil {
+		// Check that we actually managed to get a connection
+		err = db.Ping()
+	}
+
 	if err != nil {
 		panic(err)
 	}
+}
+
+// Disconnect the database
+func Disconnect() {
+	if db == nil {
+		return
+	}
+
+	db.Close()
+	db = nil
 }
 
 // GetPosts loads all the available posts from the database
