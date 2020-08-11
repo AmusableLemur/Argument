@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"net/http"
@@ -6,9 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var config Config
-
-func setupRouter() *gin.Engine {
+func setupRouter(config Config) *gin.Engine {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 
@@ -20,9 +18,4 @@ func setupRouter() *gin.Engine {
 	})
 
 	return r
-}
-
-func main() {
-	config, _ = LoadConfig("config.toml")
-	setupRouter().Run(":8080")
 }

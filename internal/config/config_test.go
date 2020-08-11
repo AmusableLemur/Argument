@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"os"
@@ -21,7 +21,7 @@ func TestConfig(t *testing.T) {
 }
 
 func TestLoadingConfig(t *testing.T) {
-	config, _ := LoadConfig("config-sample.toml")
+	config, _ := LoadConfig("../../config-sample.toml")
 
 	assert.Equal(t, "Argument", config.Title)
 }
@@ -35,7 +35,7 @@ func TestLoadingNonexistentConfig(t *testing.T) {
 }
 
 func TestDatabaseURIConfig(t *testing.T) {
-	config, _ := LoadConfig("config-sample.toml")
+	config, _ := LoadConfig("../../config-sample.toml")
 	dbURI := "root:@tcp(127.0.0.1:3306)/argument"
 
 	if "" != os.Getenv("DB_PORT") {
@@ -53,7 +53,7 @@ func TestEnvironmentConfig(t *testing.T) {
 	os.Setenv("DB_HOST", "127.0.0.2")
 	os.Setenv("DB_PORT", "1234")
 
-	config, _ := LoadConfig("config-sample.toml")
+	config, _ := LoadConfig("../../config-sample.toml")
 
 	assert.Equal(t, "root:@tcp(127.0.0.2:1234)/argument", config.Database.URI)
 
