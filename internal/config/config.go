@@ -12,6 +12,7 @@ import (
 // Config specifies the availabel configuration values
 type Config struct {
 	Title    string
+	Test     bool
 	Database struct {
 		Username string
 		Password string
