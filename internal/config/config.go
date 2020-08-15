@@ -27,7 +27,12 @@ type Config struct {
 var Conf Config
 
 func init() {
-	Conf, _ = LoadConfig("config.toml")
+	var err error
+	Conf, err = LoadConfig("config.toml")
+
+	if err != nil {
+		Conf, _ = LoadConfig("../../config.toml")
+	}
 }
 
 // LoadConfig loads a config from a file
