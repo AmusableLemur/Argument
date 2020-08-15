@@ -8,6 +8,5 @@ import (
 var conf config.Config
 
 func main() {
-	conf, _ := config.LoadConfig("config.toml")
-	app.SetupRouter(conf).Run(":8080")
+	app.SetupRouter().Run(":8080")
 }

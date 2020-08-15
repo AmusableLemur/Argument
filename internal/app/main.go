@@ -8,13 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(config config.Config) *gin.Engine {
+// SetupRouter sets up all routes
+func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": config.Title,
+			"title": config.Conf.Title,
 			"posts": database.GetPosts(),
 		})
 	})
