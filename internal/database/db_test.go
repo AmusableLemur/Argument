@@ -4,7 +4,13 @@ import (
 	"testing"
 
 	"github.com/AmusableLemur/Argument/internal/config"
+	"github.com/stretchr/testify/assert"
 )
+
+func setupTest() {
+	Disconnect()
+	Connect(config.Conf.Database.URI)
+}
 
 func TestBrokenDB(t *testing.T) {
 	defer func() {
@@ -20,5 +26,9 @@ func TestBrokenDB(t *testing.T) {
 func TestConnectingTwice(t *testing.T) {
 	Connect(config.Conf.Database.URI)
 	Connect(config.Conf.Database.URI)
-	Disconnect()
+}
+
+func TestGetPosts(t *testing.T) {
+	setupTest()
+	assert.NotNil(t, GetPosts())
 }
