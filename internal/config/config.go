@@ -22,6 +22,13 @@ type Config struct {
 	}
 }
 
+// Conf is the loaded configuration
+var Conf Config
+
+func init() {
+	Conf, _ = LoadConfig("config.toml")
+}
+
 // LoadConfig loads a config from a file
 func LoadConfig(f string) (Config, error) {
 	stream, err := ioutil.ReadFile(f)
