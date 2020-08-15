@@ -5,6 +5,7 @@ import (
 
 	"github.com/AmusableLemur/Argument/internal/config"
 
+	// Imported to get MySQL support
 	_ "github.com/go-sql-driver/mysql"
 )
 
