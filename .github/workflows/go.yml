@@ -41,13 +41,15 @@ jobs:
         fi
 
     - name: Build
-      run: go build -o argument -v ./source
+      run: go build -o argument -v .
 
     - name: Prepare database
       run: mysql -u root -h 127.0.0.1 -P ${{ job.services.mysql.ports[3306] }} argument < assets/db.sql
 
     - name: Test
-      run: go test -race -coverprofile=coverage.txt -covermode=atomic ./source
+      run: |
+        cp config-sample.toml config.toml
+        go test -race -coverprofile=coverage.txt -covermode=atomic ./...
       env:
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
