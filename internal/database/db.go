@@ -39,12 +39,10 @@ func Connect(URI string) {
 
 // Disconnect the database
 func Disconnect() {
-	if db == nil {
-		return
+	if db != nil {
+		db.Close()
+		db = nil
 	}
-
-	db.Close()
-	db = nil
 }
 
 // GetPosts loads all the available posts from the database
