@@ -5,18 +5,14 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/AmusableLemur/Argument/internal/config"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIndexRoute(t *testing.T) {
-	var err error
-	config, err = LoadConfig("config.toml")
-
-	if err != nil {
-		config, _ = LoadConfig("config-sample.toml")
-	}
-
-	router := setupRouter()
+	config.Conf, _ = config.LoadConfig("../../config.toml")
+	config.Conf.Test = true
+	router := SetupRouter()
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)
