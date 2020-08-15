@@ -18,6 +18,10 @@ type Post struct {
 	DateCreated string
 }
 
+func init() {
+	Connect(config.Conf.Database.URI)
+}
+
 // Connect prepares the database connection
 func Connect(URI string) {
 	if db != nil {
@@ -47,8 +51,6 @@ func Disconnect() {
 
 // GetPosts loads all the available posts from the database
 func GetPosts() []Post {
-	Connect(config.Conf.Database.URI)
-
 	results, _ := db.Query("SELECT id, title, created_at FROM posts")
 
 	var posts []Post
