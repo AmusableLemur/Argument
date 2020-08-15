@@ -25,7 +25,7 @@ func Connect(URI string) {
 	}
 
 	var err error
-	db, err = sql.Open("mysql", config.Conf.Database.URI)
+	db, err = sql.Open("mysql", URI)
 
 	if err == nil {
 		// Check that we actually managed to get a connection
