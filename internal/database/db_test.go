@@ -2,6 +2,8 @@ package database
 
 import (
 	"testing"
+
+	"github.com/AmusableLemur/Argument/internal/config"
 )
 
 func TestBrokenDB(t *testing.T) {
@@ -16,8 +18,7 @@ func TestBrokenDB(t *testing.T) {
 }
 
 func TestConnectingTwice(t *testing.T) {
-	config, _ := LoadConfig("config-sample.toml")
-	Connect(config.Database.URI)
-	Connect(config.Database.URI)
+	Connect(config.Conf.Database.URI)
+	Connect(config.Conf.Database.URI)
 	Disconnect()
 }
