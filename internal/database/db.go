@@ -3,6 +3,8 @@ package database
 import (
 	"database/sql"
 
+	"github.com/AmusableLemur/Argument/internal/config"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -22,7 +24,7 @@ func Connect(URI string) {
 	}
 
 	var err error
-	db, err = sql.Open("mysql", config.Database.URI)
+	db, err = sql.Open("mysql", config.Conf.Database.URI)
 
 	if err == nil {
 		// Check that we actually managed to get a connection
@@ -46,7 +48,7 @@ func Disconnect() {
 
 // GetPosts loads all the available posts from the database
 func GetPosts() []Post {
-	Connect(config.Database.URI)
+	Connect(config.Conf.Database.URI)
 
 	results, _ := db.Query("SELECT id, title, created_at FROM posts")
 
