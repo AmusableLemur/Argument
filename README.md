@@ -11,8 +11,8 @@ This is a small project to build a (very) simple discussion platform with a retr
 
 ## Setup & Installation
 
-    $ go get -v -t -d ./source/...
-    $ go run ./source
+    $ go mod download
+    $ go run .
 
 ## Technologies
 
