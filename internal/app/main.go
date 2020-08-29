@@ -25,5 +25,15 @@ func SetupRouter() *gin.Engine {
 		})
 	})
 
+	r.POST("/", func(c *gin.Context) {
+		// Try to save thread
+		// If successful show new thread
+		// otherwise show form again
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": config.Conf.Title,
+			"posts": database.GetPosts(),
+		})
+	})
+
 	return r
 }
