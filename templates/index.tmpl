@@ -10,19 +10,21 @@
 {{end}}
 
 <section class="nes-container with-title submission">
-    <h3 class="title">New Post</h3>
+    <form method="post">
+        <h3 class="title">New Post</h3>
 
-    <div class="nes-field">
-        <label for="name_field">Post Title</label>
-        <input type="text" id="name_field" class="nes-input">
-    </div>
+        <div class="nes-field">
+            <label for="title">Post Title</label>
+            <input type="text" id="title" name="title" class="nes-input">
+        </div>
 
-    <div id="textarea" class="nes-field">
-        <label for="textarea_field">Content</label>
-        <textarea id="textarea_field" class="nes-textarea"></textarea>
-    </div>
+        <div id="textarea" class="nes-field">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" class="nes-textarea"></textarea>
+        </div>
 
-    <button type="button" class="nes-btn is-disabled right-align">Submit Post</button>
-    <span>You need to be signed in to post</span>
+        <button type="submit" class="nes-btn is-disabled right-align">Submit Post</button>
+        <span>You need to be signed in to post</span>
+    </form>
 </section>
 {{template "footer"}}
