@@ -23,8 +23,12 @@
             <textarea id="content" name="content" class="nes-textarea"></textarea>
         </div>
 
-        <button type="submit" class="nes-btn is-disabled right-align">Submit Post</button>
-        <span>You need to be signed in to post</span>
+        {{if false}}
+            <button type="button" class="nes-btn is-disabled right-align" disabled>Submit Post</button>
+            <span>You need to be signed in to post</span>
+        {{else}}
+            <button type="submit" class="nes-btn right-align">Submit Post</button>
+        {{end}}
     </form>
 </section>
 {{template "footer"}}
