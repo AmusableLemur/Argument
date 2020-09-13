@@ -66,7 +66,7 @@ func GetPosts() []Post {
 
 // SavePost persists a given post to database
 func SavePost(post Post) (int64, error) {
-	query, _ := db.Prepare("INSERT INTO posts(title, created_at, created_by) values (?, NOW(), 0)")
+	query, _ := db.Prepare("INSERT INTO posts(title, created_at, created_by) values (?, NOW(), 1)")
 
 	result, err := query.Exec(post.Title)
 
