@@ -24,7 +24,7 @@ type PostsIndex struct {
 // SetupHandler prepares the route handler
 func SetupHandler() *mux.Router {
 	r := mux.NewRouter()
-	t := template.Must(template.ParseGlob("templates/*.tmpl"))
+	t := template.Must(template.ParseGlob(config.Conf.Root + "templates/*.tmpl"))
 
 	// Index page
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

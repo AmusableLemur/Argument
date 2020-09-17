@@ -11,8 +11,8 @@ import (
 
 func TestIndexRoute(t *testing.T) {
 	config.Conf, _ = config.LoadConfig("../../config.toml")
-	config.Conf.Test = true
-	router := SetupRouter()
+	config.Conf.Root = "../../"
+	router := SetupHandler()
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)
