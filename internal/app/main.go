@@ -1,40 +1,56 @@
 package app
 
 import (
+	"html/template"
 	"net/http"
 
 	"github.com/AmusableLemur/Argument/internal/config"
 	"github.com/AmusableLemur/Argument/internal/database"
-	"github.com/gin-gonic/gin"
+	"github.com/gorilla/mux"
 )
 
-// SetupRouter sets up all routes
-func SetupRouter() *gin.Engine {
-	r := gin.Default()
+// PostIndex is used for the individual post pages
+type PostIndex struct {
+	PageTitle string
+	Post      database.Post
+}
 
-	if config.Conf.Test {
-		r.LoadHTMLGlob("../../templates/*")
-	} else {
-		r.LoadHTMLGlob("templates/*")
-	}
+// PostsIndex is used for the index page
+type PostsIndex struct {
+	PageTitle string
+	Posts     []database.Post
+}
 
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": config.Conf.Title,
-			"posts": database.GetPosts(),
+// SetupHandler prepares the route handler
+func SetupHandler() *mux.Router {
+	r := mux.NewRouter()
+	t := template.Must(template.ParseGlob("templates/*.tmpl"))
+
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		err := t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
+			PageTitle: config.Conf.Title,
+			Posts:     database.GetPosts(),
 		})
+
+		if err != nil {
+			panic(err)
+		}
 	})
 
-	r.POST("/", func(c *gin.Context) {
-		p := database.Post{Title: c.PostForm("title")}
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		p := database.Post{Title: r.FormValue("title")}
 
 		database.SavePost(p)
 
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": config.Conf.Title,
-			"posts": database.GetPosts(),
+		err := t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
+			PageTitle: config.Conf.Title,
+			Posts:     database.GetPosts(),
 		})
-	})
+
+		if err != nil {
+			panic(err)
+		}
+	}).Methods("POST")
 
 	return r
 }
