@@ -26,30 +26,24 @@ func SetupHandler() *mux.Router {
 	r := mux.NewRouter()
 	t := template.Must(template.ParseGlob("templates/*.tmpl"))
 
+	// Index page
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err := t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
+		t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
 			PageTitle: config.Conf.Title,
 			Posts:     database.GetPosts(),
 		})
-
-		if err != nil {
-			panic(err)
-		}
 	})
 
+	// Creating a post
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		p := database.Post{Title: r.FormValue("title")}
 
 		database.SavePost(p)
 
-		err := t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
+		t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
 			PageTitle: config.Conf.Title,
 			Posts:     database.GetPosts(),
 		})
-
-		if err != nil {
-			panic(err)
-		}
 	}).Methods("POST")
 
 	return r
