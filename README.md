@@ -17,7 +17,7 @@ This is a small project to build a (very) simple discussion platform with a retr
 ## Technologies
 
  - Go
- - [Gin Web Framework](https://github.com/gin-gonic/gin)
+ - [gorilla/mux](https://github.com/gorilla/mux)
  - [NES.css](https://nostalgic-css.github.io/NES.css/)
  - [NES.icons](https://github.com/nostalgic-css/NES.icons)
 
