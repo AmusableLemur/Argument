@@ -17,5 +17,6 @@ require (
 	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/tsenart/deadcode v0.0.0-20160724212837-210d2dc333e9 // indirect
+	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 )
