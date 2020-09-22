@@ -13,6 +13,7 @@ import (
 type Config struct {
 	Title      string
 	Root       string
+	Debug      bool
 	SessionKey string
 	Database   struct {
 		Username string
