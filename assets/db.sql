@@ -14,3 +14,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`password` varchar(60) NOT NULL,
 	PRIMARY KEY (`id`)
 );
+
+ALTER TABLE `users` ADD UNIQUE INDEX `username` (`username`);
