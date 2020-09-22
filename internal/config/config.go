@@ -9,7 +9,7 @@ import (
 	toml "github.com/pelletier/go-toml"
 )
 
-// Config specifies the availabel configuration values
+// Config specifies the available configuration values
 type Config struct {
 	Title      string
 	Root       string
