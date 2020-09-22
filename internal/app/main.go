@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/AmusableLemur/Argument/internal/auth"
 	"github.com/AmusableLemur/Argument/internal/config"
 	"github.com/AmusableLemur/Argument/internal/database"
 	"github.com/gorilla/mux"
@@ -45,6 +46,21 @@ func SetupHandler() *mux.Router {
 			Posts:     database.GetPosts(),
 		})
 	}).Methods("POST")
+
+	// Registration
+	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "POST" {
+			p := auth.HashPassword(r.FormValue("password"))
+			u := database.User{Username: r.FormValue("username"), Password: p}
+
+			database.CreateUser(u)
+		}
+
+		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
+			PageTitle: config.Conf.Title,
+			Posts:     database.GetPosts(),
+		})
+	}).Methods("GET", "POST")
 
 	return r
 }
