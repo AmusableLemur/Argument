@@ -45,11 +45,11 @@ func SetupHandler() *mux.Router {
 			PageTitle: config.Conf.Title,
 			Posts:     database.GetPosts(),
 		})
-	}).Methods("POST")
+	}).Methods(http.MethodPost)
 
 	// Registration
 	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == "POST" {
+		if r.Method == http.MethodPost {
 			p := auth.HashPassword(r.FormValue("password"))
 			u := database.User{Username: r.FormValue("username"), Password: p}
 
@@ -68,7 +68,7 @@ func SetupHandler() *mux.Router {
 			PageTitle: config.Conf.Title,
 			Posts:     database.GetPosts(),
 		})
-	}).Methods("GET", "POST")
+	}).Methods(http.MethodGet, http.MethodPost)
 
 	return r
 }
