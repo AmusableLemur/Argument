@@ -53,7 +53,15 @@ func SetupHandler() *mux.Router {
 			p := auth.HashPassword(r.FormValue("password"))
 			u := database.User{Username: r.FormValue("username"), Password: p}
 
-			database.CreateUser(u)
+			id, _ := database.CreateUser(u)
+
+			if id > 0 {
+				// Set the user as logged in
+
+				http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+
+				return
+			}
 		}
 
 		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
