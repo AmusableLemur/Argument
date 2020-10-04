@@ -51,9 +51,10 @@ func SetupHandler() *mux.Router {
 	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			p := auth.HashPassword(r.FormValue("password"))
-			u := database.User{Username: r.FormValue("username"), Password: p}
+			u := auth.NormalizeUsername(r.FormValue("username"))
+			user := database.User{Username: u, Password: p}
 
-			id, _ := database.CreateUser(u)
+			id, _ := database.CreateUser(user)
 
 			if id > 0 {
 				// Set the user as logged in

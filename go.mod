@@ -18,5 +18,6 @@ require (
 	github.com/stretchr/testify v1.6.1
 	github.com/tsenart/deadcode v0.0.0-20160724212837-210d2dc333e9 // indirect
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
+	golang.org/x/text v0.3.2
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 )
