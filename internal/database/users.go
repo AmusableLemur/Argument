@@ -1,5 +1,11 @@
 package database
 
+import (
+	"errors"
+
+	"github.com/AmusableLemur/Argument/internal/auth"
+)
+
 // User contains everything required for a user
 type User struct {
 	ID       int64
@@ -19,16 +25,22 @@ func CreateUser(user User) (int64, error) {
 	return result.LastInsertId()
 }
 
-// FindUser attempts to finds a user ID by name and password
-func FindUser(user User) (int64, error) {
-	query := "SELECT id FROM users WHERE username = ? AND password = ?"
-	err := db.QueryRow(query, &user.Username, &user.Password).Scan(&user.ID)
+// VerifyLogin checks if login information is correct and returns a user ID
+func VerifyLogin(username string, password string) (User, error) {
+	user := User{Username: username}
+	query := "SELECT id, password FROM users WHERE username = ?"
+	err := db.QueryRow(query, &user.Username).Scan(&user.ID, &user.Password)
 
 	if err != nil {
-		return 0, err
+		return user, errors.New("Username does not exist")
 	}
 
-	return user.ID, nil
+	if auth.CheckPassword(password, user.Password) {
+		return user, nil
+	}
+
+	// Password does not match
+	return user, errors.New("Password is invalid")
 }
 
 // GetUser finds a user by ID (if any) and returns it
