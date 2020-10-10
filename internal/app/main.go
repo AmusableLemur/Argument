@@ -77,13 +77,9 @@ func SetupHandler() *mux.Router {
 	// Login
 	r.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
-			p := auth.HashPassword(r.FormValue("password"))
-			u := auth.NormalizeUsername(r.FormValue("username"))
-			user := database.User{Username: u, Password: p}
+			_, err := database.VerifyLogin(r.FormValue("username"), r.FormValue("password"))
 
-			id, _ := database.FindUser(user)
-
-			if id > 0 {
+			if err == nil {
 				// Set the user as logged in
 				// https://github.com/gorilla/sessions
 
