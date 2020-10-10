@@ -58,11 +58,41 @@ func SetupHandler() *mux.Router {
 
 			if id > 0 {
 				// Set the user as logged in
+				// https://github.com/gorilla/sessions
 
 				http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 
 				return
 			}
+
+			// Show message about error logging in
+		}
+
+		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
+			PageTitle: config.Conf.Title,
+			Posts:     database.GetPosts(),
+		})
+	}).Methods(http.MethodGet, http.MethodPost)
+
+	// Login
+	r.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			p := auth.HashPassword(r.FormValue("password"))
+			u := auth.NormalizeUsername(r.FormValue("username"))
+			user := database.User{Username: u, Password: p}
+
+			id, _ := database.FindUser(user)
+
+			if id > 0 {
+				// Set the user as logged in
+				// https://github.com/gorilla/sessions
+
+				http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+
+				return
+			}
+
+			// Show message about user not found
 		}
 
 		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
