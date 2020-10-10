@@ -2,7 +2,7 @@ package database
 
 // User contains everything required for a user
 type User struct {
-	ID       int
+	ID       int64
 	Username string
 	Password string // Should be encrypted at all times
 }
@@ -17,6 +17,18 @@ func CreateUser(user User) (int64, error) {
 	}
 
 	return result.LastInsertId()
+}
+
+// FindUser attempts to finds a user ID by name and password
+func FindUser(user User) (int64, error) {
+	query := "SELECT id FROM users WHERE username = ? AND password = ?"
+	err := db.QueryRow(query, &user.Username, &user.Password).Scan(&user.ID)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return user.ID, nil
 }
 
 // GetUser finds a user by ID (if any) and returns it
