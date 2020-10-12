@@ -49,6 +49,8 @@ func SetupHandler() *mux.Router {
 
 	// Registration
 	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		failed := false
+
 		if r.Method == http.MethodPost {
 			p := auth.HashPassword(r.FormValue("password"))
 			u := auth.NormalizeUsername(r.FormValue("username"))
@@ -65,13 +67,13 @@ func SetupHandler() *mux.Router {
 				return
 			}
 
-			// Show message about error logging in
+			failed = true
 		}
 
-		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
-			PageTitle: config.Conf.Title,
-			Posts:     database.GetPosts(),
-		})
+		t.ExecuteTemplate(w, "register.tmpl", struct {
+			PageTitle string
+			Failed    bool
+		}{config.Conf.Title, failed})
 	}).Methods(http.MethodGet, http.MethodPost)
 
 	// Login
