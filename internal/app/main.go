@@ -10,16 +10,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Page contains generic information for all pages
+type Page struct {
+	Title string
+}
+
 // PostIndex is used for the individual post pages
 type PostIndex struct {
-	PageTitle string
-	Post      database.Post
+	Page Page
+	Post database.Post
 }
 
 // PostsIndex is used for the index page
 type PostsIndex struct {
-	PageTitle string
-	Posts     []database.Post
+	Page  Page
+	Posts []database.Post
 }
 
 // SetupHandler prepares the route handler
@@ -27,11 +32,15 @@ func SetupHandler() *mux.Router {
 	r := mux.NewRouter()
 	t := template.Must(template.ParseGlob(config.Conf.Root + "templates/*.tmpl"))
 
+	page := Page{
+		Title: config.Conf.Title,
+	}
+
 	// Index page
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
-			PageTitle: config.Conf.Title,
-			Posts:     database.GetPosts(),
+			Page:  page,
+			Posts: database.GetPosts(),
 		})
 	})
 
@@ -42,8 +51,8 @@ func SetupHandler() *mux.Router {
 		database.SavePost(p)
 
 		t.ExecuteTemplate(w, "index.tmpl", PostsIndex{
-			PageTitle: config.Conf.Title,
-			Posts:     database.GetPosts(),
+			Page:  page,
+			Posts: database.GetPosts(),
 		})
 	}).Methods(http.MethodPost)
 
@@ -71,9 +80,9 @@ func SetupHandler() *mux.Router {
 		}
 
 		t.ExecuteTemplate(w, "register.tmpl", struct {
-			PageTitle string
-			Failed    bool
-		}{config.Conf.Title, failed})
+			Page   Page
+			Failed bool
+		}{page, failed})
 	}).Methods(http.MethodGet, http.MethodPost)
 
 	// Login
@@ -94,8 +103,8 @@ func SetupHandler() *mux.Router {
 		}
 
 		t.ExecuteTemplate(w, "register.tmpl", PostsIndex{
-			PageTitle: config.Conf.Title,
-			Posts:     database.GetPosts(),
+			Page:  page,
+			Posts: database.GetPosts(),
 		})
 	}).Methods(http.MethodGet, http.MethodPost)
 
