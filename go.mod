@@ -3,6 +3,7 @@ module github.com/AmusableLemur/Argument
 go 1.14
 
 require (
+	4d63.com/gochecknoglobals v0.0.0-20201008074935-acfc0b28355a // indirect
 	4d63.com/gochecknoinits v0.0.0-20200108094044-eb73b47b9fc4 // indirect
 	github.com/alexkohler/nakedret v1.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1
