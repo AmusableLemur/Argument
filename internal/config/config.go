@@ -23,6 +23,9 @@ type Config struct {
 		Port     int
 		URI      string
 	}
+	Session struct {
+		Key string
+	}
 }
 
 // Conf is the loaded configuration
