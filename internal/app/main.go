@@ -8,6 +8,7 @@ import (
 	"github.com/AmusableLemur/Argument/internal/config"
 	"github.com/AmusableLemur/Argument/internal/database"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 )
 
 // Page contains generic information for all pages
@@ -26,6 +27,8 @@ type PostsIndex struct {
 	Page  Page
 	Posts []database.Post
 }
+
+var storage = sessions.NewCookieStore([]byte(config.Conf.Session.Key))
 
 // SetupHandler prepares the route handler
 func SetupHandler() *mux.Router {
